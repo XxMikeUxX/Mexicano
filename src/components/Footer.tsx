@@ -86,7 +86,7 @@ export default function Footer() {
                 Réserver
               </a>
               <a
-                href="https://g.page"
+                href="https://www.google.com/maps/place/MEXICANO/@45.7323072,4.8701933,17z/data=!4m15!1m8!3m7!1s0x47f4c1fb66ab1b27:0xbdb355d83740c6fd!2s56+Av.+Paul+Santy,+69008+Lyon!3b1!8m2!3d45.7323035!4d4.8727736!16s%2Fg%2F11c1k5lzqp!3m5!1s0x47f4c115865fffb3:0x8f8b67b53ef7caed!8m2!3d45.7323263!4d4.8728399!16s%2Fg%2F11j4txm9qk?entry=ttu&g_ep=EgoyMDI2MDIwOC4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-6 py-3 border border-[#D4A056]/50 text-[#D4A056] text-sm uppercase tracking-wider rounded-full hover:bg-[#D4A056]/10 transition-colors text-center"

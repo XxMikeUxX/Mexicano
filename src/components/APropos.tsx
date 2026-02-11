@@ -93,7 +93,7 @@ export default function ChefSection() {
           }`}
         >
           <Image
-            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop"
+            src="images/salle.jpg"
             alt="Intérieur du restaurant Mexican'o"
             fill
             className="object-cover"
