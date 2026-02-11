@@ -18,7 +18,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c?q=80&w=2070&auto=format&fit=crop')`,
+          backgroundImage: `url('images/portada.jpeg')`,
         }}
       >
         {/* Overlay gradient */}

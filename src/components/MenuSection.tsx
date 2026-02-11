@@ -33,7 +33,7 @@ export default function MenuSection() {
       {/* Background image with overlay */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?q=80&w=2070&auto=format&fit=crop"
+          src="images/PLATO MIXTO.jpeg"
           alt="Mexican food background"
           fill
           className="object-cover opacity-20"
@@ -55,7 +55,7 @@ export default function MenuSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          Du mardi au samedi, pour le déjeuner et le dîner, réservez une table chez Mexican&apos;o !
+          Du mardi au dimanche, pour le déjeuner et le dîner, réservez une table chez Mexican&apos;o !
         </p>
 
         <div
@@ -94,7 +94,7 @@ export default function MenuSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
               </svg>
             </div>
-            <h3 className="text-[#D4A056] font-serif text-xl mb-2">MENÚ ETIDIANT</h3>
+            <h3 className="text-[#D4A056] font-serif text-xl mb-2">MENÚ ETUDIANT</h3>
             <p className="text-[#F7F3ED]/60 text-sm">À partir de 6€</p>
           </div>
 

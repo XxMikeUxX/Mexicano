@@ -14,28 +14,28 @@ export default function Footer() {
             </h3>
             <div className="space-y-4">
               <a
-                href="tel:+33142567890"
+                href="tel:+33665367737"
                 className="block text-[#F7F3ED]/80 hover:text-[#D4A056] transition-colors"
               >
-                01 42 56 78 90
+                06 65 36 77 37
               </a>
               <a
-                href="mailto:contact@mexicano-paris.fr"
+                href="mailto:mexicanolyon8@gmail.com"
                 className="block text-[#F7F3ED]/80 hover:text-[#D4A056] transition-colors underline"
               >
-                contact@mexicano-paris.fr
+                mexicanolyon8@gmail.com
               </a>
             </div>
 
             <div className="mt-8">
               <p className="text-[#F7F3ED]/60 text-sm mb-2">Suivez Mexican&apos;o sur Instagram :</p>
               <a
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/mexicano_lyon_8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#F7F3ED] hover:text-[#D4A056] transition-colors underline"
               >
-                @mexicano_paris
+                @mexicano_lyon_8
               </a>
             </div>
           </div>
@@ -55,12 +55,15 @@ export default function Footer() {
 
             <div className="text-[#F7F3ED]/60 text-sm">
               <p className="mb-2">
-                Ouvert du <strong className="text-[#F7F3ED]">mardi</strong> au{" "}
-                <strong className="text-[#F7F3ED]">samedi</strong>
+                Ouvert le matin <strong className="text-[#F7F3ED]"> du mercredi au samedi </strong> de{" "}
+                <strong className="text-[#F7F3ED]">12hs jusqu&apos;a 14hs30</strong>
               </p>
               <p>
-                Pour le <strong className="text-[#F7F3ED]">déjeuner</strong> et le{" "}
-                <strong className="text-[#F7F3ED]">dîner</strong>
+                Et le soir <strong className="text-[#F7F3ED]">du mardi au dimanche </strong> de{" "}
+                <strong className="text-[#F7F3ED]">19hs jusqu&apos;a 22hs30</strong>
+              </p>
+              <p>
+                Sauf Vendredi et Samedi de <strong className="text-[#F7F3ED]">19hs jusqu&apos;a 23:30 </strong>
               </p>
             </div>
           </div>
@@ -71,8 +74,8 @@ export default function Footer() {
               ADRESSE
             </h3>
             <address className="not-italic text-[#F7F3ED]/80 mb-8">
-              <p>15 Rue du Faubourg Saint-Honoré</p>
-              <p>75008 Paris</p>
+              <p>65 Av. Paul Santy</p>
+              <p>69008 Lyon</p>
             </address>
 
             <div className="flex flex-col gap-3 md:items-end">
@@ -97,7 +100,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-[#F7F3ED]/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[#F7F3ED]/40 text-xs">
-            © 2024 Mexican&apos;o. Tous droits réservés.
+            © 2026 Mexican&apos;o. Tous droits réservés.
           </p>
           <p className="text-[#F7F3ED]/40 text-xs">
             Réalisation{" "}
@@ -105,7 +108,7 @@ export default function Footer() {
               href="#"
               className="text-[#D4A056]/60 hover:text-[#D4A056] transition-colors"
             >
-              @agencecreative
+              @maicolchavez
             </a>
           </p>
         </div>

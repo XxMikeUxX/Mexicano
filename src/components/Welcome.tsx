@@ -67,7 +67,7 @@ export default function Welcome() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          Á PROPOS
+          UN PEU DE NOUS
         </h2>
 
         <p
@@ -75,11 +75,10 @@ export default function Welcome() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          DIA DE LOS MUERTOS <strong className="text-[#C45C3A]">UN PEU DE NOUS</strong>, à la fois{" "}
-          <strong className="text-[#1F1E1D]">en cuisine et en salle</strong>, vous accueille
-          dans notre restaurant mexicain gastronomique au cœur de Paris. Afin de partager
-          directement sa passion pour la cuisine mexicaine avec vous, le chef vous sert
-          lui-même des plats raffinés et pleins de saveurs authentiques.
+          Mexican&apros;o <strong className="text-[#C45C3A]">un restaurant HALAL</strong>, à la fois{" "}
+          <strong className="text-[#1F1E1D]">installé au cœur du 8ᵉ arrondissement de Lyon</strong>, và quelques pas du quartier Bachut. 
+          Notre établissement propose une cuisine mexicaine authentique, familiale et conviviale, élaborée à partir de produits frais et 
+          rigoureusement sélectionnés.
         </p>
 
         <p
@@ -87,10 +86,10 @@ export default function Welcome() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          Des produits d&apos;exception sont sélectionnés, cuisinés avec respect des traditions
-          et sublimés avec une touche contemporaine. Ensemble, nous créons des menus en
-          plusieurs actes, offrant un service où chaque détail est soigneusement orchestré
-          pour vous faire vivre <strong className="text-[#C45C3A]">une expérience singulière</strong>.
+          Dans un cadre coloré, chaleureux et inspiré des traditions mexicaines, nous accueillons nos clients pour un véritable voyage 
+          culinaire : tacos, burritos, enchiladas, quesadillas, guacamole maison et généreux plateaux à partager sont au cœur de notre carte. 
+          Les portions sont copieuses, les saveurs équilibrées <strong className="text-[#C45C3A]">– relevées sans être excessivement épicées 
+            –</strong> afin de convenir aussi bien aux amateurs de sensations fortes qu&apos;aux palais plus délicats.
         </p>
       </div>
     </section>
