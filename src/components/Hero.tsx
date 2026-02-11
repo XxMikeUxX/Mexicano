@@ -59,7 +59,7 @@ export default function Hero() {
           }`}
         >
           <a
-            href="#menu"
+            href="https://www.canva.com/design/DAGSUznTAPs/dtR8Rq19cjzPkYbDcLv3ZA/view?utm_content=DAGSUznTAPs&utm_campaign=designshare&utm_medium=link&utm_source=editor#3"
             className="btn-mexican px-8 py-4 bg-[#C45C3A] text-[#F7F3ED] uppercase tracking-wider rounded-full hover:bg-[#A34A2F] transition-all duration-300 text-sm font-medium"
           >
             Découvrir le menu

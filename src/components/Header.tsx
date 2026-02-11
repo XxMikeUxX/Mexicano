@@ -58,7 +58,7 @@ export default function Header() {
         {/* CTA Button */}
         <div className="hidden lg:flex items-center gap-6">
           <a
-            href="https://www.instagram.com"
+            href="https://www.instagram.com/mexicano_lyon_8"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#F7F3ED] hover:text-[#D4A056] transition-colors"

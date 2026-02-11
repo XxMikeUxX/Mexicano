@@ -21,7 +21,7 @@ const galleryImages = [
     alt: "Guacamole artisanal",
   },
   {
-    src: "images/pico de gallo.jpg",
+    src: "images/pico de gallo.jpeg",
     alt: "Pico de Gallo",
   },
   {

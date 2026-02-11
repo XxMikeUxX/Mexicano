@@ -42,15 +42,15 @@ export default function APropos() {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-0">
-          {/* Chef Image */}
+          {/* Melange Image */}
           <div
             className={`relative h-[400px] md:h-[600px] transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
             }`}
           >
             <Image
-              src="images/flyer.jpeg"
-              alt="flyer"
+              src="images/melange.jpg"
+              alt="Melange Frite"
               fill
               className="object-cover"
             />
@@ -61,7 +61,7 @@ export default function APropos() {
             </div>
           </div>
 
-          {/* Chef Info */}
+          {/* Resto Info */}
           <div
             className={`flex flex-col justify-center p-8 md:p-12 lg:p-16 transition-all duration-1000 delay-300 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
