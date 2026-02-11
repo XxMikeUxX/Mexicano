@@ -74,7 +74,7 @@ export default function Footer() {
               ADRESSE
             </h3>
             <address className="not-italic text-[#F7F3ED]/80 mb-8">
-              <p>65 Av. Paul Santy</p>
+              <p>56 Av. Paul Santy</p>
               <p>69008 Lyon</p>
             </address>
 

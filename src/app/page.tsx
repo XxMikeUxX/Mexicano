@@ -17,9 +17,7 @@ export default function Home() {
       <Marquee text="MEXICAN'O" direction="left" />
       <Gallery />
       <Marquee text="LYON" direction="right" />
-      <section id="APropos">
-        <Apropos />
-      </section>
+      <Apropos />
       <Footer />
     </main>
   );

@@ -27,7 +27,7 @@ export default function APropos() {
   return (
     <section
       ref={sectionRef}
-      id="chef"
+      id="APropos"
       className="relative bg-[#1F1E1D] overflow-hidden"
     >
       {/* Background pattern */}
@@ -57,7 +57,7 @@ export default function APropos() {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#1F1E1D] hidden md:block" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1F1E1D] via-transparent to-transparent md:hidden" />
             <div className="absolute bottom-0 left-0 p-8">
-              <h3 className="text-3xl md:text-4xl font-serif text-[#F7F3ED] mb-2">POUR DES ETUDIANT</h3>
+              <h3 className="text-3xl md:text-4xl font-serif text-[#F7F3ED] mb-2">Melange Frite</h3>
             </div>
           </div>
 
