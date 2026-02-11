@@ -6,27 +6,27 @@ import Image from "next/image";
 const galleryImages = [
   {
     src: "images/boo.jpg",
-    alt: "Plat mexicain raffiné",
-  },
-  {
-    src: "images/deco.jpg",
-    alt: "Tacos gourmet",
+    alt: "Decoration Día de los muertos",
   },
   {
     src: "images/exported.jpg",
-    alt: "Intérieur du restaurant",
+    alt: "Produits exporté",
+  },
+  {
+    src: "images/deco.jpg",
+    alt: "Decoration",
   },
   {
     src: "images/guacamole.jpg",
     alt: "Guacamole artisanal",
   },
   {
-    src: "images/enchiladas.jpg",
-    alt: "Enchiladas",
+    src: "images/pico de gallo.jpg",
+    alt: "Pico de Gallo",
   },
   {
     src: "images/jumex.jpg",
-    alt: "Margarita cocktail",
+    alt: "Cocktail Mexicain",
   },
 ];
 
