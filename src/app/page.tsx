@@ -4,7 +4,7 @@ import Welcome from "@/components/Welcome";
 import MenuSection from "@/components/MenuSection";
 import Marquee from "@/components/Marquee";
 import Gallery from "@/components/Gallery";
-import APropos from "@/components/Apropos";
+import Apropos from "@/components/APropos";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
       <Marquee text="MEXICAN'O" direction="left" />
       <Gallery />
       <Marquee text="LYON" direction="right" />
-      <ChefSection />
+      <Apropos />
       <Footer />
     </main>
   );
