@@ -32,8 +32,8 @@ export const BookingWidget = () => {
             time: selectedTime,
             people,
             nom: "Cliente web",  // ← Añade form nombre/email después
-            email: "cliente@example.com",
-            telephone: "06 12 34 56 78",
+            email: "mikeu171@gmail.com",
+            telephone: "07 58 89 06 68",
         }),
         });
 

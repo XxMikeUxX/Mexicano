@@ -8,43 +8,56 @@ const resend = new Resend(process.env.RESEND_API_KEY || '');
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
+    
+    // Mapea campos del frontend → backend
+    const dateStr = data.date;  // "13 février 2026" (PPP)
+    const heure = data.time;    // "20:00"
+    const personnes = data.people;
+    const nom = data.nom;
+    const email = data.email;
+    const telephone = data.telephone;
 
-    // Verifica mesa aún libre (doble check)
-    const mesaLibre = await sql`
+    // Encuentra mesa libre por capacidad (ej: para 2+ pers)
+    const mesasLibres = await sql`
       SELECT m.* FROM mesas m
       LEFT JOIN reservas r ON m.id = r.mesa_id 
-        AND r.date_resa = ${data.date_resa}::date 
-        AND r.heure = ${data.heure}::time
-      WHERE m.id = ${data.mesa_id} AND r.id IS NULL
+        AND r.date_resa = ${dateStr}::date 
+        AND r.heure = ${heure}::time
+      WHERE m.capacite >= ${personnes} AND r.id IS NULL
+      ORDER BY m.capacite ASC, m.numero ASC
+      LIMIT 1
     `;
-    if (mesaLibre.length === 0) {
-      return NextResponse.json({ error: 'Table plus disponible' }, { status: 400 });
+    
+    if (mesasLibres.length === 0) {
+      return NextResponse.json({ error: 'Aucune table disponible' }, { status: 400 });
     }
 
+    const mesa = mesasLibres[0];
+    
     // Guarda reserva
     await sql`
       INSERT INTO reservas (nom, email, telephone, date_resa, heure, personnes, mesa_id)
-      VALUES (${data.nom}, ${data.email}, ${data.telephone}, ${data.date_resa}::date, ${data.heure}::time, ${data.personnes}, ${data.mesa_id})
+      VALUES (${nom}, ${email}, ${telephone}, ${dateStr}::date, ${heure}::time, ${personnes}, ${mesa.id})
     `;
 
-    // Email confirm (a ti y cliente)
+    // Email confirm
     await resend.emails.send({
       from: 'no-reply@mexicano-lyon.com',
-      to: [data.email, 'mikeu1807@gmail.com'],  // ¡Cambia por tu email!
-      subject: `Réservation Confirmée - Mexican'o Lyon ${data.date_resa}`,
+      to: [email, 'mikeu1807@gmail.com'],
+      subject: `Réservation Confirmée - Mexican'o Lyon ${dateStr}`,
       html: `
         <h1>✅ Réservation Confirmée!</h1>
-        <p><strong>Client:</strong> ${data.nom}<br>
-           <strong>Date:</strong> ${data.date_resa} à ${data.heure}<br>
-           <strong>Table:</strong> ${mesaLibre[0].numero} (${mesaLibre[0].capacite} places)<br>
-           <strong>Personnes:</strong> ${data.personnes}</p>
-        <p>📞 Confirmez par téléphone: 07 58 89 06 68</p>
+        <p><strong>Client:</strong> ${nom}<br>
+           <strong>Date:</strong> ${dateStr} à ${heure}<br>
+           <strong>Table:</strong> ${mesa.numero} (${mesa.capacite} places)<br>
+           <strong>Personnes:</strong> ${personnes}</p>
+        <p>📞 Confirmez: 07 58 89 06 68</p>
       `,
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, mesa: mesa.numero });
   } catch (error) {
-    console.error(error);
+    console.error('Error reserva:', error);
     return NextResponse.json({ error: 'Erreur réservation' }, { status: 500 });
   }
 }
