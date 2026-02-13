@@ -20,10 +20,10 @@ const formSchema = z.object({
   nom: z.string().min(2, "Nom trop court"),
   email: z.string().email("Email invalide"),
   telephone: z.string().min(10, "Téléphone incomplet"),
-  date_resa: z.date({ required_error: "Choisissez une date" }),
-  heure: z.enum(["19:00", "21:00"], { required_error: "Service: 19h ou 21h (Ven/Sam seulement)" }),
+  date_resa: z.date({ message: "Choisissez une date" }),
+  heure: z.enum(["19:00", "21:00"], { message: "Service: 19h ou 21h (Ven/Sam seulement)" }),
   personnes: z.coerce.number().min(1, "Min 1 personne").max(20, "Max 20 personnes"),
-  mesa_id: z.number({ required_error: "Sélectionnez une table disponible" }),
+  mesa_id: z.number({ message: "Sélectionnez une table disponible" }),
 });
 
 type FormData = z.infer<typeof formSchema>;

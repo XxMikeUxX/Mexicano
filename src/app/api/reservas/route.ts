@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     // Email confirm (a ti y cliente)
     await resend.emails.send({
       from: 'no-reply@mexicano-lyon.com',
-      to: [data.email, 'tu-email@lyon.fr'],  // ¡Cambia por tu email!
+      to: [data.email, 'mikeu1807@gmail.com'],  // ¡Cambia por tu email!
       subject: `Réservation Confirmée - Mexican'o Lyon ${data.date_resa}`,
       html: `
         <h1>✅ Réservation Confirmée!</h1>
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
            <strong>Date:</strong> ${data.date_resa} à ${data.heure}<br>
            <strong>Table:</strong> ${mesaLibre[0].numero} (${mesaLibre[0].capacite} places)<br>
            <strong>Personnes:</strong> ${data.personnes}</p>
-        <p>📞 Confirmez par téléphone: 04 XX XX XX XX</p>
+        <p>📞 Confirmez par téléphone: 07 58 89 06 68</p>
       `,
     });
 
