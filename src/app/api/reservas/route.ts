@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
-const sql = neon(process.env.MEXICANO_DATABASE_URL!);
+const sql = neon(process.env.DATABASE_URL!);
 const resend = new Resend(process.env.RESEND_API_KEY || '');
 
 export async function POST(req: NextRequest) {
