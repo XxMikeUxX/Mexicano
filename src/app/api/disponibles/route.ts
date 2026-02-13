@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
       ORDER BY m.numero
     `;
 
-    return NextResponse.json({ mesas: libres.rows });
+    return NextResponse.json({ mesas: libres });
   } catch (error) {
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
   }
