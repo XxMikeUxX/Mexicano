@@ -65,7 +65,7 @@ export default function Hero() {
             Découvrir le menu
           </a>
           <a
-            href="/src/app/reservas/page.tsx"
+            href="/reservas"
             className="btn-mexican px-8 py-4 border-2 border-[#F7F3ED]/50 text-[#F7F3ED] uppercase tracking-wider rounded-full hover:bg-[#F7F3ED]/10 hover:border-[#F7F3ED] transition-all duration-300 text-sm font-medium"
           >
             Réserver une table
