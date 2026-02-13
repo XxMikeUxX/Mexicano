@@ -38,6 +38,18 @@ export default function Footer() {
                 @mexicano_lyon_8
               </a>
             </div>
+
+            <div className="mt-8">
+              <p className="text-[#F7F3ED]/60 text-sm mb-2">Suivez Mexican&apos;o sur TikTok :</p>
+              <a
+                href="https://www.tiktok.com/@mexicano.lyon.8 "
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#F7F3ED] hover:text-[#D4A056] transition-colors underline"
+              >
+                @@mexicano.lyon.8
+              </a>
+            </div>
           </div>
 
           {/* Logo and Hours */}

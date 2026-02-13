@@ -42,22 +42,22 @@ export default function APropos() {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-0">
-          {/* Melange Image */}
+          {/* Equipe Image */}
           <div
             className={`relative h-[400px] md:h-[600px] transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
             }`}
           >
             <Image
-              src="images/melange.jpg"
-              alt="Melange Frite"
+              src="images/equipo.jpeg"
+              alt="Equipe Mexican'o"
               fill
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#1F1E1D] hidden md:block" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1F1E1D] via-transparent to-transparent md:hidden" />
             <div className="absolute bottom-0 left-0 p-8">
-              <h3 className="text-3xl md:text-4xl font-serif text-[#F7F3ED] mb-2">Melange Frite</h3>
+              <h3 className="text-3xl md:text-4xl font-serif text-[#F7F3ED] mb-2">Tortilla Challenge</h3>
             </div>
           </div>
 
@@ -80,8 +80,8 @@ export default function APropos() {
             </p>
 
             <blockquote className="border-l-2 border-[#C45C3A] pl-6 italic text-[#D4A056]">
-              &ldquo;&rdquo;
-              <span className="block mt-2 text-[#F7F3ED]/60 not-italic text-sm">— </span>
+              &ldquo;Venez comme vous êtes&rdquo;
+              <span className="block mt-2 text-[#F7F3ED]/60 not-italic text-sm">— Julia  </span>
             </blockquote>
           </div>
         </div>

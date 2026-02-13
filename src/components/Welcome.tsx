@@ -75,8 +75,8 @@ export default function Welcome() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          Mexican'o <strong className="text-[#C45C3A]">un restaurant HALAL</strong>, à la fois{" "}
-          <strong className="text-[#1F1E1D]">installé au cœur du 8ᵉ arrondissement de Lyon</strong>, và quelques pas du quartier Bachut. 
+          Mexican'o <strong className="text-[#C45C3A]">un restaurant MEXICAINE</strong>, à la fois{" "}
+          <strong className="text-[#1F1E1D]">installé au cœur du 8ᵉ arrondissement de Lyon</strong>, à quelques pas de la Maison de la Danse. 
           Notre établissement propose une cuisine mexicaine authentique, familiale et conviviale, élaborée à partir de produits frais et 
           rigoureusement sélectionnés.
         </p>
