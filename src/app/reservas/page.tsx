@@ -22,7 +22,7 @@ const formSchema = z.object({
   telephone: z.string().min(10, "Téléphone incomplet"),
   date_resa: z.date({ message: "Choisissez une date" }),
   heure: z.enum(["19:00", "21:00"], { message: "Service: 19h ou 21h (Ven/Sam seulement)" }),
-  personnes: z.coerce.number().min(1, "Min 1 personne").max(20, "Max 20 personnes"),
+  personnes: z.number().min(1, "Min 1 personne").max(20, "Max 20 personnes"),
   mesa_id: z.number({ message: "Sélectionnez une table disponible" }),
 });
 
@@ -204,7 +204,7 @@ export default function PageReservas() {
                     </FormControl>
                     <SelectContent>
                       {Array.from({ length: 10 }, (_, i) => i + 1).map((p) => (
-                        <SelectItem key={p} value={p}>{p} personne{p > 1 ? 's' : ''}</SelectItem>
+                        <SelectItem key={p} value={p.toString()}>{p} personne{p > 1 ? 's' : ''}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -233,7 +233,7 @@ export default function PageReservas() {
                     </FormControl>
                     <SelectContent>
                       {mesasLibres.map((mesa) => (
-                        <SelectItem key={mesa.id} value={mesa.id}>
+                        <SelectItem key={mesa.id} value={mesa.id.toString()}>
                           Table {mesa.numero} ({mesa.capacite} places)
                         </SelectItem>
                       ))}
@@ -272,7 +272,7 @@ export default function PageReservas() {
 
         <div className="mt-16 pt-12 border-t border-orange-200 text-center text-sm text-muted-foreground space-y-2">
           <p>📍 Mexican'o Lyon • 56 Av Paul Santy, 69008 Lyon</p>
-          <p>📞 04 XX XX XX XX • T6 Arrêt Pressence</p>
+          <p>📞 07 58 89 06 68 • T6 Arrêt Pressence</p>
           <p className="text-xs">* Confimation par téléphone sous 24h. Annulations gratuites.</p>
         </div>
       </div>
