@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         AND r.heure = ${data.heure}::time
       WHERE m.id = ${data.mesa_id} AND r.id IS NULL
     `;
-    if (mesaLibre.rows.length === 0) {
+    if (mesaLibre.length === 0) {
       return NextResponse.json({ error: 'Table plus disponible' }, { status: 400 });
     }
 
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
         <h1>✅ Réservation Confirmée!</h1>
         <p><strong>Client:</strong> ${data.nom}<br>
            <strong>Date:</strong> ${data.date_resa} à ${data.heure}<br>
-           <strong>Table:</strong> ${mesaLibre.rows[0].numero} (${mesaLibre.rows[0].capacite} places)<br>
+           <strong>Table:</strong> ${mesaLibre[0].numero} (${mesaLibre[0].capacite} places)<br>
            <strong>Personnes:</strong> ${data.personnes}</p>
         <p>📞 Confirmez par téléphone: 04 XX XX XX XX</p>
       `,
