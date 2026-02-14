@@ -39,7 +39,7 @@ export const BookingWidget = () => {
           time: selectedTime,
           people,
           nom: "Cliente web",
-          email: "mikeu171@gmail.com",
+          email: "mikeu1807@gmail.com",
           telephone: "+33758890668",
         }),
       });

@@ -62,10 +62,10 @@ export async function POST(req: NextRequest) {
     if (email) toEmails.push(email);  // + cliente si existe
 
     await resend.emails.send({
-    from: 'no-reply@resend.dev',
-    to: toEmails,
-    subject: `🌮 Mexican'o Lyon - Reserva Table ${mesa.numero}`,
-    html: `
+      from: 'resend@resend.dev',
+      to: ['mikeu1807@gmail.com'],  // ÚNICO - registrado en Resend
+      subject: `🌮 NUEVA RESERVA #${mesa.numero}`,
+      html: `
       <h1 style="color: #e74c3c;">✅ ¡Confirmada!</h1>
       <p><strong>Table:</strong> #${mesa.numero} (${mesa.capacite} lugares)<br>
       <strong>Fecha:</strong> ${dateISO} ${heure}<br>
