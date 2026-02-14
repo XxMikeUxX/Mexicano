@@ -31,7 +31,7 @@ export const BookingWidget = () => {
     try {
       console.log('📅 Enviando date:', date);  // Debug
 
-      const res = await fetch("/api/reserva", {
+      const res = await fetch("/api/reservas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -40,7 +40,7 @@ export const BookingWidget = () => {
           people,
           nom: "Cliente web",
           email: "mikeu171@gmail.com",
-          telephone: "07 58 89 06 68",
+          telephone: "+33758890668",
         }),
       });
 
@@ -59,7 +59,7 @@ export const BookingWidget = () => {
       }
     } catch (error) {
       console.error('Error fetch:', error);
-      alert("❌ Error conexión. WhatsApp: 07 58 89 06 68");
+      alert("❌ Error conexión. WhatsApp: + 33 7 58 89 06 68");
     }
   };
 
