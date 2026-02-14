@@ -57,14 +57,25 @@ export async function POST(req: NextRequest) {
       VALUES (${nom}, ${email}, ${telephone}, ${dateISO}::date, ${heure}::time, ${personnes}, ${mesa.id})
     `;
 
-    // Email
+    // Email (FIX definitivo - array simple)
+    const toEmails = ['mikeu1807@gmail.com'];  // Siempre a TI
+    if (email) toEmails.push(email);  // + cliente si existe
+
     await resend.emails.send({
-      from: 'no-reply@mexicano-lyon.com',
-      to: ['mikeu1807@gmail.com'],  // Siempre a ti
-      ...(email && { to: [... , email] }),
-      subject: `🌮 Mexican'o - Reserva #${mesa.numero}`,
-      html: `<h1>✅ Confirmada!</h1><p>Table ${mesa.numero} (${mesa.capacite}pl)<br>${dateISO} ${heure}<br>${personnes}pax - ${nom}</p>`
-    });
+    from: 'no-reply@mexicano-lyon.com',
+    to: toEmails,
+    subject: `🌮 Mexican'o Lyon - Reserva Table ${mesa.numero}`,
+    html: `
+      <h1 style="color: #e74c3c;">✅ ¡Confirmada!</h1>
+      <p><strong>Table:</strong> #${mesa.numero} (${mesa.capacite} lugares)<br>
+      <strong>Fecha:</strong> ${dateISO} ${heure}<br>
+      <strong>${personnes} personas</strong> - ${nom}<br>
+      <strong>${telephone}</strong></p>
+      <hr>
+      <small>07 58 89 06 68</small>
+    `
+  });
+
 
     return NextResponse.json({ 
       success: true, 
