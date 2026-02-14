@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
     if (email) toEmails.push(email);  // + cliente si existe
 
     await resend.emails.send({
-    from: 'no-reply@mexicano-lyon.com',
+    from: 'no-reply@resend.dev',
     to: toEmails,
     subject: `🌮 Mexican'o Lyon - Reserva Table ${mesa.numero}`,
     html: `
