@@ -10,20 +10,31 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
-    console.log('📥 Data:', data);
+    console.log('📥 Data cruda:', data);
     
-    // 🔥 FIX DATE: convierte "Saturday, February 14, 2026" → "2026-02-14"
-    const dateFull = new Date(data.date);
-    const dateISO = dateFull.toISOString().split('T')[0];  // "2026-02-14"
-    const heure = data.time;  // "19:00"
-    const personnes = data.people;
+    // 🔥 FIX DATE: robusto contra invalid/empty
+    let dateISO = '';
+    if (data.date) {
+      const dateFull = new Date(data.date);
+      if (!isNaN(dateFull.getTime())) {  // Válido?
+        dateISO = dateFull.toISOString().split('T')[0];  // "2026-02-14"
+      } else {
+        throw new Error(`Fecha inválida: "${data.date}"`);
+      }
+    } else {
+      throw new Error('Falta fecha en reserva');
+    }
+    
+    const heure = data.time || '';
+    const personnes = parseInt(data.people) || 2;
     const nom = data.nom || 'Cliente';
     const email = data.email || '';
     const telephone = data.telephone || '';
 
-    console.log('📅 Date parseada:', dateISO);
+    if (!heure) throw new Error('Falta hora');
+    console.log('✅ Parsed:', { dateISO, heure, personnes });
 
-    // Tu query PERFECTA (ahora con dateISO)
+    // Tu query mesas
     const mesasLibres = await sql`
       SELECT m.* FROM mesas m
       LEFT JOIN reservas r ON m.id = r.mesa_id 
@@ -34,34 +45,35 @@ export async function POST(req: NextRequest) {
       LIMIT 1
     `;
     
-    if (mesasLibres.length === 0) {
-      return NextResponse.json({ error: '😔 Aucune table disponible' }, { status: 400 });
+    if (!mesasLibres?.length) {
+      return NextResponse.json({ error: `😔 No mesas libres ${dateISO} ${heure} x${personnes}` }, { status: 400 });
     }
 
     const mesa = mesasLibres[0];
     
-    // Guarda
+    // Insert
     await sql`
       INSERT INTO reservas (nom, email, telephone, date_resa, heure, personnes, mesa_id)
       VALUES (${nom}, ${email}, ${telephone}, ${dateISO}::date, ${heure}::time, ${personnes}, ${mesa.id})
     `;
 
-    // Email bonito (tuyo)
+    // Email
     await resend.emails.send({
       from: 'no-reply@mexicano-lyon.com',
-      to: [email || 'mikeu1807@gmail.com', 'mikeu1807@gmail.com'],
-      subject: `✅ Mexican'o Lyon - Table ${mesa.numero} ${dateISO}`,
-      html: `<h1>🌮 ¡Réservation Confirmée!</h1><p><strong>Table:</strong> #${mesa.numero} (${mesa.capacite}pl)<br>${dateISO} ${heure} x${personnes}<br>${nom} ${telephone}</p>`
+      to: ['mikeu1807@gmail.com'],  // Siempre a ti
+      ...(email && { to: [... , email] }),
+      subject: `🌮 Mexican'o - Reserva #${mesa.numero}`,
+      html: `<h1>✅ Confirmada!</h1><p>Table ${mesa.numero} (${mesa.capacite}pl)<br>${dateISO} ${heure}<br>${personnes}pax - ${nom}</p>`
     });
 
     return NextResponse.json({ 
       success: true, 
       mesa: mesa.numero,
-      message: `🎉 ¡Table ${mesa.numero} confirmée!`
+      message: `🎉 ¡Table ${mesa.numero} reservada!`
     });
     
   } catch (error: any) {
-    console.error('💥 Error:', error);
+    console.error('💥 Error:', error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
