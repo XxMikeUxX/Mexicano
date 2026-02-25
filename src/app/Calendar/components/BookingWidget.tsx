@@ -208,7 +208,12 @@ export const BookingWidget = () => {
 
         {step === "time" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-300 space-y-4">
-            <TimeSelector selectedTime={time} onSelectTime={handleTimeSelect} />
+            <TimeSelector
+              selectedDate={date}
+              selectedTime={time}
+              onSelectTime={handleTimeSelect}
+            />
+
 
             {/* Mini formulario: aparece SOLO cuando ya hay fecha + hora + personas */}
             {canAskContact && (
