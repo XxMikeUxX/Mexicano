@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon, Users, Clock } from "lucide-react";
 import { z } from "zod";
+import { fr } from "date-fns/locale";
+
 
 type Step = "date" | "people" | "time";
 
@@ -115,23 +117,31 @@ export const BookingWidget = () => {
     }
   };
 
-  if (status === "success") {
-    return (
-      <div className="rounded-xl border p-6 text-center bg-white">
-        <h3 className="text-xl font-semibold">Gracias por elegirnos</h3>
-        <p className="mt-2 text-muted-foreground">
-          Recibimos tu reserva. Si hay cualquier detalle, te contactaremos.
-        </p>
+ if (status === "success") {
+  return (
+    <div className="rounded-xl border p-6 text-center bg-white">
+      <h3 className="text-xl font-semibold">Merci de nous avoir choisis</h3>
 
-        <button
-          onClick={resetAll}
-          className="mt-5 w-full rounded-md bg-green-700 text-white py-2"
-        >
-          Hacer otra reserva
-        </button>
-      </div>
-    );
-  }
+      <p className="mt-2 text-muted-foreground">
+        Nous avons bien reçu votre réservation pour{" "}
+        <strong>
+          {date ? format(date, "PPP", { locale: fr }) : "—"}
+          {time ? ` à ${time}` : ""}
+        </strong>
+        .
+      </p>
+
+      <button
+        type="button"
+        onClick={resetAll}
+        className="mt-5 w-full rounded-md bg-green-700 text-white py-2"
+      >
+        Faire une autre réservation
+      </button>
+    </div>
+  );
+}
+
 
   const TabButton = ({
     active,
@@ -172,14 +182,15 @@ export const BookingWidget = () => {
           onClick={() => setStep("date")}
           icon={CalendarIcon}
           label="Date"
-          value={date ? format(date, "MMM d") : undefined}
+          value={date ? format(date, "d MMM", { locale: fr }) : undefined}
+
         />
         <div className="w-px bg-stone-200 my-2" />
         <TabButton
           active={step === "people"}
           onClick={() => setStep("people")}
           icon={Users}
-          label="Guests"
+          label="Personnes"
           value={`${people} Pers.`}
         />
         <div className="w-px bg-stone-200 my-2" />
@@ -187,7 +198,7 @@ export const BookingWidget = () => {
           active={step === "time"}
           onClick={() => setStep("time")}
           icon={Clock}
-          label="Time"
+          label="Heure"
           value={time || undefined}
         />
       </div>
@@ -249,7 +260,7 @@ export const BookingWidget = () => {
                     onClick={() => setStatus("idle")}
                     className="w-full rounded-md border border-stone-200 py-2"
                   >
-                    Intentar de nuevo
+                    Essayer une autre date/heure
                   </button>
                 )}
               </div>

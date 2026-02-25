@@ -1,5 +1,4 @@
 import { Logo } from "../components/Logo";
-import { LanguageSelector } from "../components/LanguageSelector";
 import { BookingWidget }  from "../components/BookingWidget";
 export const Header = () => {
  return (
@@ -8,9 +7,6 @@ export const Header = () => {
  <div className="w-full px-4 py-4 md:px-10 flex justify-between items-center border-b border-stone-100 md:border-none">
  <div className="flex-shrink-0">
  <Logo />
- </div>
- <div className="flex items-center gap-4">
- <LanguageSelector />
  </div>
  </div>
  {/* Main Content */}

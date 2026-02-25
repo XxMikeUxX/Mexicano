@@ -39,7 +39,7 @@
     // We need to shift so Monday is 0, Sunday is 6.
     const startDay = getDay(startOfMonth(currentMonth));
     const emptySlots = startDay === 0 ? 6 : startDay - 1;
-    const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const weekDays = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
     return (
     <div className="w-full max-w-[390px] mx-auto flex flex-col items-center">
     {/* Navigation */}

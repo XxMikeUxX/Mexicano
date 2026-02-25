@@ -54,8 +54,8 @@ export const TimeSelector = ({ selectedDate, selectedTime, onSelectTime }: TimeS
     return (
       <div className="w-full max-w-[390px] mx-auto">
         <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 text-center">
-          <p className="font-semibold text-stone-800">Lunes cerrado</p>
-          <p className="text-sm text-stone-600 mt-1">Por favor elige otra fecha.</p>
+          <p className="font-semibold text-stone-800">Lundi Fermé</p>
+          <p className="text-sm text-stone-600 mt-1">Veuillez choisir une autre date.</p>
         </div>
       </div>
     );
@@ -65,7 +65,7 @@ export const TimeSelector = ({ selectedDate, selectedTime, onSelectTime }: TimeS
     <div className="w-full max-w-[390px] mx-auto flex flex-col gap-6">
       <div>
         <h3 className="text-center text-sm uppercase tracking-wider text-stone-500 mb-4 font-semibold">
-          Lunch
+          Déjeuner
         </h3>
         <div className="grid grid-cols-3 gap-3">
           {lunchSlots.map((time) => (
@@ -76,7 +76,7 @@ export const TimeSelector = ({ selectedDate, selectedTime, onSelectTime }: TimeS
 
       <div>
         <h3 className="text-center text-sm uppercase tracking-wider text-stone-500 mb-4 font-semibold">
-          Dinner
+          Diner
         </h3>
         <div className="grid grid-cols-3 gap-3">
           {dinnerSlots.map((time) => (
