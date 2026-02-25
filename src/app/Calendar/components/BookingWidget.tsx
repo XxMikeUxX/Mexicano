@@ -1,18 +1,44 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useMemo, useState } from "react";
 import { Calendar } from "./Calendar";
 import { PeopleSelector } from "./PeopleSelector";
 import { TimeSelector } from "./TimeSelector";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon, Users, Clock } from "lucide-react";
+import { z } from "zod";
 
 type Step = "date" | "people" | "time";
 
+const reservaSchema = z.object({
+  date: z.date({ error: "Elige una fecha" }),
+  time: z.string().min(1, { error: "Elige una hora" }),
+  people: z.coerce.number().int().min(1).max(12),
+  name: z.string().min(2, { error: "Escribe tu nombre" }),
+  phone: z
+    .string()
+    .min(6, { error: "Teléfono demasiado corto" })
+    .max(20, { error: "Teléfono demasiado largo" })
+    .regex(/^[0-9+().\s-]+$/, { error: "Teléfono inválido" }),
+});
+
 export const BookingWidget = () => {
   const [step, setStep] = useState<Step>("date");
+
   const [date, setDate] = useState<Date | null>(null);
   const [people, setPeople] = useState<number>(2);
   const [time, setTime] = useState<string | null>(null);
+
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const canAskContact = useMemo(() => {
+    return !!date && !!time && !!people;
+  }, [date, time, people]);
 
   const handleDateSelect = (selectedDate: Date) => {
     setDate(selectedDate);
@@ -24,44 +50,88 @@ export const BookingWidget = () => {
     setStep("time");
   };
 
-  const handleTimeSelect = async (selectedTime: string) => {
+  // IMPORTANTE: ya NO enviamos aquí; solo guardamos la hora
+  const handleTimeSelect = (selectedTime: string) => {
     setTime(selectedTime);
+  };
 
-    // 🔥 ENVÍA REAL con DATE FIX
+  const resetAll = () => {
+    setStatus("idle");
+    setErrorMsg(null);
+
+    setStep("date");
+    setDate(null);
+    setPeople(2);
+    setTime(null);
+
+    setName("");
+    setPhone("");
+  };
+
+  const submitReserva = async () => {
+    setErrorMsg(null);
+
+    const check = reservaSchema.safeParse({
+      date: date ?? undefined,
+      time: time ?? "",
+      people,
+      name,
+      phone,
+    });
+
+    if (!check.success) {
+      setErrorMsg(check.error.issues[0]?.message ?? "Datos inválidos");
+      return;
+    }
+
     try {
-      console.log('📅 Enviando date:', date);  // Debug
+      setStatus("submitting");
 
       const res = await fetch("/api/reservas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          date: date ? format(date, "yyyy-MM-dd") : '',  // 🔥 FIX: ISO "2026-02-14"
-          time: selectedTime,
-          people,
-          nom: "Cliente web",
-          email: "mikeu1807@gmail.com",
-          telephone: "+33758890668",
+          date: format(check.data.date, "yyyy-MM-dd"),
+          time: check.data.time,
+          people: check.data.people,
+          nom: check.data.name,
+          email: "mikeu1807@gmail.com", // si tu API lo requiere, lo dejamos fijo por ahora
+          telephone: check.data.phone,
         }),
       });
 
       const data = await res.json();
-      console.log('📨 Response:', data);  // Debug
 
       if (res.ok) {
-        alert(`✅ ${data.message || 'Reserva confirmada!'} Table ${data.mesa}`);
-        // Reset widget
-        setStep("date");
-        setDate(null);
-        setPeople(2);
-        setTime(null);
+        setStatus("success");
       } else {
-        alert(`❌ ${data.error || 'Error reserva'}`);
+        setStatus("error");
+        setErrorMsg(data?.error || "Error reserva");
       }
     } catch (error) {
-      console.error('Error fetch:', error);
-      alert("❌ Error conexión. WhatsApp: + 33 7 58 89 06 68");
+      console.error("Error fetch:", error);
+      setStatus("error");
+      setErrorMsg("Error conexión. Intenta de nuevo.");
     }
   };
+
+  if (status === "success") {
+    return (
+      <div className="rounded-xl border p-6 text-center bg-white">
+        <h3 className="text-xl font-semibold">Gracias por elegirnos</h3>
+        <p className="mt-2 text-muted-foreground">
+          Recibimos tu reserva. Si hay cualquier detalle, te contactaremos.
+        </p>
+
+        <button
+          onClick={resetAll}
+          className="mt-5 w-full rounded-md bg-green-700 text-white py-2"
+        >
+          Hacer otra reserva
+        </button>
+      </div>
+    );
+  }
 
   const TabButton = ({
     active,
@@ -77,12 +147,11 @@ export const BookingWidget = () => {
     value?: string;
   }) => (
     <button
+      type="button"
       onClick={onClick}
       className={cn(
         "flex-1 flex items-center justify-center gap-2 py-2 px-1 transition-all duration-200 relative overflow-hidden",
-        active
-          ? "text-green-700 bg-green-50"
-          : "text-stone-400 hover:text-stone-600 hover:bg-stone-50"
+        active ? "text-green-700 bg-green-50" : "text-stone-400 hover:text-stone-600 hover:bg-stone-50"
       )}
     >
       <Icon className={cn("w-4 h-4", active ? "text-green-700" : "text-stone-400")} />
@@ -90,9 +159,7 @@ export const BookingWidget = () => {
         <span className="text-[10px] uppercase tracking-wider font-semibold opacity-70">{label}</span>
         {value && <span className="text-xs font-medium truncate max-w-[60px]">{value}</span>}
       </div>
-      {active && (
-        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-green-700" />
-      )}
+      {active && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-green-700" />}
     </button>
   );
 
@@ -124,7 +191,7 @@ export const BookingWidget = () => {
           value={time || undefined}
         />
       </div>
-      
+
       {/* Content */}
       <div className="p-4 min-h-[380px] flex flex-col justify-center">
         {step === "date" && (
@@ -132,20 +199,56 @@ export const BookingWidget = () => {
             <Calendar selectedDate={date} onSelectDate={handleDateSelect} />
           </div>
         )}
+
         {step === "people" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <PeopleSelector
-              selectedPeople={people}
-              onSelectPeople={handlePeopleSelect}
-            />
+            <PeopleSelector selectedPeople={people} onSelectPeople={handlePeopleSelect} />
           </div>
         )}
+
         {step === "time" && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <TimeSelector
-              selectedTime={time}
-              onSelectTime={handleTimeSelect}
-            />
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-300 space-y-4">
+            <TimeSelector selectedTime={time} onSelectTime={handleTimeSelect} />
+
+            {/* Mini formulario: aparece SOLO cuando ya hay fecha + hora + personas */}
+            {canAskContact && (
+              <div className="space-y-3 pt-2">
+                <input
+                  className="w-full rounded-md border border-stone-200 px-3 py-2 outline-none focus:ring-2 focus:ring-green-200"
+                  placeholder="Tu nombre"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+
+                <input
+                  className="w-full rounded-md border border-stone-200 px-3 py-2 outline-none focus:ring-2 focus:ring-green-200"
+                  placeholder="+33 6..."
+                  inputMode="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+
+                {errorMsg && <p className="text-sm text-red-600">{errorMsg}</p>}
+
+                <button
+                  onClick={submitReserva}
+                  disabled={status === "submitting"}
+                  className="w-full rounded-md bg-green-700 text-white py-2 disabled:opacity-50"
+                >
+                  {status === "submitting" ? "Enviando..." : "Confirmar reserva"}
+                </button>
+
+                {status === "error" && (
+                  <button
+                    type="button"
+                    onClick={() => setStatus("idle")}
+                    className="w-full rounded-md border border-stone-200 py-2"
+                  >
+                    Intentar de nuevo
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>
