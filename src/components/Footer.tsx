@@ -92,7 +92,7 @@ export default function Footer() {
 
             <div className="flex flex-col gap-3 md:items-end">
               <a
-                href="#contact"
+                href="/reservas"
                 className="inline-block btn-mexican px-6 py-3 bg-[#C45C3A] text-[#F7F3ED] text-sm uppercase tracking-wider rounded-full hover:bg-[#A34A2F] transition-colors text-center"
               >
                 Réserver

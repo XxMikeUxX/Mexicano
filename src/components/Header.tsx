@@ -140,7 +140,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/reservas"
             className="btn-mexican px-6 py-2.5 bg-[#C45C3A] text-[#F7F3ED] text-sm uppercase tracking-wider rounded-full hover:bg-[#A34A2F] transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >

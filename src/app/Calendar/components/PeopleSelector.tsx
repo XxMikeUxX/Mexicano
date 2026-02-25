@@ -15,7 +15,7 @@
     return (
     <div className="w-full max-w-[390px] mx-auto">
     <h3 className="text-center text-lg mb-6 font-medium">
-    How many people?
+    Combien de personnes ?
     </h3>
     <div className="grid grid-cols-4 gap-3">
     {options.map((num) => (

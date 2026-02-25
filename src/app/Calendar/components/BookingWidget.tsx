@@ -14,15 +14,15 @@ import { fr } from "date-fns/locale";
 type Step = "date" | "people" | "time";
 
 const reservaSchema = z.object({
-  date: z.date({ error: "Elige una fecha" }),
-  time: z.string().min(1, { error: "Elige una hora" }),
+  date: z.date({ error: "Choisis une date" }),
+  time: z.string().min(1, { error: "Choisis une heure" }),
   people: z.coerce.number().int().min(1).max(12),
-  name: z.string().min(2, { error: "Escribe tu nombre" }),
+  name: z.string().min(2, { error: "Ecris votre nom" }),
   phone: z
     .string()
-    .min(6, { error: "Teléfono demasiado corto" })
-    .max(20, { error: "Teléfono demasiado largo" })
-    .regex(/^[0-9+().\s-]+$/, { error: "Teléfono inválido" }),
+    .min(6, { error: "Numéro de téléphone trop court" })
+    .max(20, { error: "Numéro de téléphone trop long" })
+    .regex(/^[0-9+().\s-]+$/, { error: "Numéro de téléphone invalide" }),
 });
 
 export const BookingWidget = () => {
@@ -82,7 +82,7 @@ export const BookingWidget = () => {
     });
 
     if (!check.success) {
-      setErrorMsg(check.error.issues[0]?.message ?? "Datos inválidos");
+      setErrorMsg(check.error.issues[0]?.message ?? "Données invalides");
       return;
     }
 
@@ -108,12 +108,12 @@ export const BookingWidget = () => {
         setStatus("success");
       } else {
         setStatus("error");
-        setErrorMsg(data?.error || "Error reserva");
+        setErrorMsg(data?.error || "Erreur de réservation");
       }
     } catch (error) {
       console.error("Error fetch:", error);
       setStatus("error");
-      setErrorMsg("Error conexión. Intenta de nuevo.");
+      setErrorMsg("Erreur de connexion. Veuillez réessayer.");
     }
   };
 
@@ -231,7 +231,7 @@ export const BookingWidget = () => {
               <div className="space-y-3 pt-2">
                 <input
                   className="w-full rounded-md border border-stone-200 px-3 py-2 outline-none focus:ring-2 focus:ring-green-200"
-                  placeholder="Tu nombre"
+                  placeholder="Votre nom"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -251,7 +251,7 @@ export const BookingWidget = () => {
                   disabled={status === "submitting"}
                   className="w-full rounded-md bg-green-700 text-white py-2 disabled:opacity-50"
                 >
-                  {status === "submitting" ? "Enviando..." : "Confirmar reserva"}
+                  {status === "submitting" ? "Envoi en cours..." : "Confirmer la réservation"}
                 </button>
 
                 {status === "error" && (

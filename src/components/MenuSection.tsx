@@ -70,7 +70,7 @@ export default function MenuSection() {
             Découvrir les menus
           </a>
           <a
-            href="#contact"
+            href="/reservas"
             className="btn-mexican px-8 py-4 border-2 border-[#D4A056] text-[#D4A056] uppercase tracking-wider rounded-full hover:bg-[#D4A056] hover:text-[#1F1E1D] transition-all duration-300 text-sm font-medium"
           >
             Réserver
